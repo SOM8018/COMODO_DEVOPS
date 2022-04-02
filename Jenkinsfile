@@ -1,5 +1,9 @@
 pipeline {
-    agent any 
+    agent {
+        docker {
+            image 'openjdk:11'
+        }
+    }
     
     options {
         skipStagesAfterUnstable()
@@ -32,6 +36,17 @@ pipeline {
        
 
      
+
+
+
+
+
+
+
+
+
+
+
 
 
         // stage('Test') {
