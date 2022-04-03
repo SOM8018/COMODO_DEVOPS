@@ -6,12 +6,15 @@ pipeline {
     //         args '-v $HOME/.m2:/root/.m2'
     //     }
     // }
+    tools {
+        maven 'MAVEN'
+    }
     
     options {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Build') {
+        stage('Check Sonarqube qualitygate') {
 
             steps{
 
@@ -34,11 +37,14 @@ pipeline {
 
             }
         }
-        stage ('test'){
+        stage ('Build'){
 
             steps{
+                //i will first build the docker image and push it to docker hub for testing purpose then i will go for nexus repo
+                // script{
+                //     docker build . -t 
+                // }
                 sh 'pwd'
-
 
             }
         }
