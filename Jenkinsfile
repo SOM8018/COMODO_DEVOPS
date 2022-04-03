@@ -51,7 +51,7 @@ pipeline {
 
             steps{
                 script{
-                    sh 'docker build -t imeamsoam/my-app-1.0 . '
+                    sh 'docker build -t SOM8018/my-app-1.0 . '
                 }
             }
            
