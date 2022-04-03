@@ -50,9 +50,12 @@ pipeline {
         stage ('Sent a email if build successful'){
 
             steps{
-                sh 'pwd'
-                
-
+                sh './mvn test'
+            }
+            post{
+                always {
+                    junit '**/target/TEST-*.xml'
+                }
             }
         }
         stage ('Deploy '){
@@ -95,13 +98,9 @@ pipeline {
         //     }
         // }
     }
-    // post{
-    //     always{
-    //         steps{
-    //             junit {
-    //              testResults: '*test-Reports/.xml'
-    //             }
-    //         }
+    // post{success {
+        //             junit 'target/surefire-reports/*.xml'
+        //         }
             
     //     }
     // }
