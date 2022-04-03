@@ -38,9 +38,25 @@ pipeline {
             steps{
                 sh 'pwd'
 
+
             }
         }
+        stage ('Sent a email if build successful'){
 
+            steps{
+                sh 'pwd'
+                
+
+            }
+        }
+        stage ('Deploy '){
+
+            steps{
+                sh 'pwd'
+                
+
+            }
+        }
        
 
      
