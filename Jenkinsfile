@@ -64,7 +64,7 @@ pipeline {
                          withCredentials([string(credentialsId: 'docker-secret-auth', variable: 'dockersecrettoken')]) {
                         sh 'docker login -u soamibm -p ${dockersecrettoken} docker.io '
 
-                        sh 'docker push soamfirstdockerimage/my-app-1.0'
+                        sh 'docker image push --all-tags soamfirstdockerimage/my-app-1.0'
                     }                   
                     
                 }
