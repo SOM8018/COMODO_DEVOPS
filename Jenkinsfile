@@ -6,6 +6,9 @@ pipeline {
     //         args '-v $HOME/.m2:/root/.m2'
     //     }
     // }
+    environment{
+        VERSION="${env.BUILD_ID}"
+    }
     tools {
         maven 'MAVEN'
     }
@@ -52,7 +55,8 @@ pipeline {
 
             steps{
                 script{
-                    sh 'docker build -t soamfirstdockerimage/my-app-1.0 . '
+                    //sh 'docker build -t soamfirstdockerimage/my-app-1.0 . '
+                    sh 'docker build -t 34.125.158.228:8083/firstapp:${VERSION} .'
                 }
             }
            
@@ -65,9 +69,9 @@ pipeline {
 
                         sh '''
 
-                        docker login -u soamibm -p ${dockersecrettoken} docker.io
+                        docker login -u soamibm -p ${dockersecrettoken} 34.125.158.228:8083
 
-                        docker push soamfirstdockerimage/my-app-1.0
+                        docker push 34.125.158.228:8083/firstapp:${VERSION}
 
                         '''
                     }                   
