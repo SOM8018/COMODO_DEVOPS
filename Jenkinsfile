@@ -52,7 +52,7 @@ pipeline {
 
             steps{
                 script{
-                    sh 'docker build -t myfirstApp . '
+                    sh 'docker build -t soamfirstdockerimage/my-app-1.0 . '
                 }
             }
            
@@ -64,7 +64,7 @@ pipeline {
                          withCredentials([string(credentialsId: 'docker-secret-auth', variable: 'dockersecrettoken')]) {
                         sh 'docker login -u soamibm -p ${dockersecrettoken} docker.io '
 
-                        sh 'docker push myfirstApp'
+                        sh 'docker push soamfirstdockerimage/my-app-1.0'
                     }                   
                     
                 }
