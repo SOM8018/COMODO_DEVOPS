@@ -47,10 +47,12 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
-        stage ('Sent a email if build successful'){
+        stage ('Build Docker image'){
 
             steps{
-                sh 'pwd'
+                script{
+                    sh 'docker build -t imeamsoam/my-app-1.0 . '
+                }
             }
            
         }
