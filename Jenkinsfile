@@ -61,8 +61,8 @@ pipeline {
 
             steps{
                 script{
-                         withCredentials([string(credentialsId: 'soamibm', variable: 'dockerhubpassword')]) {
-                        sh 'docker login -u soamibm -p ${dockerhubpassword}  '
+                         withCredentials([string(credentialsId: 'docker-secret-auth', variable: 'dockersecrettoken')]) {
+                        sh 'docker login -u soamibm -p ${dockersecrettoken}  '
 
                         sh 'docker push soamfirstdockerimage/my-app-1.0'
                     }                   
