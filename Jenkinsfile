@@ -50,7 +50,7 @@ pipeline {
         stage ('Sent a email if build successful'){
 
             steps{
-                sh './mvn test'
+                
             }
            
         }
