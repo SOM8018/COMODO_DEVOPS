@@ -19,16 +19,16 @@ pipeline {
             steps{
                       //First i will check with sonarqube quality gates , if it will pass then it will build
                       // otherwise it will show the error
-                script{
+                 script{
                     withSonarQubeEnv(credentialsId : 'sonar-token') { 
                      sh "mvn sonar:sonar"
                     }
-                   timeout(time: 1, unit: 'HOURS') {
-                     def qg = waitForQualityGate()
-                      if (qg.status != 'OK') {
-                         error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                       }
-                   }
+                       timeout(time: 1, unit: 'HOURS') {
+                        def qg = waitForQualityGate()
+                          if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                          }
+                        }
 
                    sh "mvn clean install"
                    sh 'pwd'
@@ -36,7 +36,7 @@ pipeline {
                 }
             }
         }
-        stage ('Build'){
+        stage ('Build') {
 
             steps{
                 //i will first build the docker image and push it to docker hub for testing purpose then i will go for nexus repo
@@ -95,17 +95,16 @@ pipeline {
         //     }
         // }
     }
-    post{
-        always{
-            steps{
-                junit{
-                 allowEmptyResults:true,
-                 testResults: '*test-Reports/.xml'
-                }
-            }
+    // post{
+    //     always{
+    //         steps{
+    //             junit {
+    //              testResults: '*test-Reports/.xml'
+    //             }
+    //         }
             
-        }
-    }
+    //     }
+    // }
 }
 
 
