@@ -17,7 +17,8 @@ pipeline {
         stage('Check Sonarqube qualitygate') {
 
             steps{
-
+                      //First i will check with sonarqube quality gates , if it will pass then it will build
+                      // otherwise it will show the error
                 script{
                     withSonarQubeEnv(credentialsId : 'sonar-token') { 
                      sh "mvn sonar:sonar"
@@ -33,8 +34,6 @@ pipeline {
                    sh 'pwd'
                    sh 'ls'
                 }
-
-
             }
         }
         stage ('Build'){
@@ -44,7 +43,6 @@ pipeline {
                 // script{
                 //     docker build . -t 
                 // }
-
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '455b6a62-bbad-46ae-bb82-95437cba744c', url: 'https://github.com/SOM8018/COMODO_DEVOPS.git']]])
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
@@ -96,6 +94,14 @@ pipeline {
         //         sh './jenkins/scripts/deliver.sh'
         //     }
         // }
+    }
+    post{
+        always{
+            junit{
+                allowEmplyResults : true ,
+                testResults : '*test-Reports/.xml' ,
+            }
+        }
     }
 }
 
