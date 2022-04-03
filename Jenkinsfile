@@ -29,7 +29,6 @@ pipeline {
                             error "Pipeline aborted due to quality gate failure: ${qg.status}"
                           }
                         }
-
                    sh "mvn clean install"
                    sh 'pwd'
                    sh 'ls'
@@ -49,6 +48,8 @@ pipeline {
         }
         stage ('Build Docker image'){
 
+            //Building jar: /var/lib/jenkins/workspace/devops_Test/target/my-app-1.0-SNAPSHOT.jar
+
             steps{
                 script{
                     sh 'docker build -t soamfirstdockerimage/my-app-1.0 . '
@@ -56,30 +57,22 @@ pipeline {
             }
            
         }
-        stage ('Deploy '){
+        stage ('Push docker image'){
 
             steps{
-                sh 'pwd'
+                script{
+                         withCredentials([string(credentialsId: 'soamibm', variable: 'dockerhubpassword')]) {
+                        sh 'docker login -u soamibm -p ${dockerhubpassword}  '
+
+                        sh 'docker push soamfirstdockerimage/my-app-1.0'
+                    }                   
+                    
+                }
                 
 
             }
         }
        
-
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
         // stage('Test') {
         //     steps {
         //         sh 'mvn test -Dmaven.test.failure.ignore=true'
