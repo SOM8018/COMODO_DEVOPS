@@ -97,9 +97,13 @@ pipeline {
     }
     post{
         always{
-            junit{
-                testResults: '*test-Reports/.xml'
+            steps{
+                junit{
+                 allowEmptyResults:true,
+                 testResults: '*test-Reports/.xml'
+                }
             }
+            
         }
     }
 }
