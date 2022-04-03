@@ -67,7 +67,9 @@ pipeline {
 
                         sh 'docker login -u soamibm -p ${dockersecrettoken} docker.io '
 
-                        sh 'docker image push --all-tags soamfirstdockerimage/my-app-1.0'
+                        sh 'docker tag myfirstimage soamfirstdockerimage/my-app-1.0'
+
+                        sh 'docker push soamfirstdockerimage/my-app-1.0'
                     }                   
                     
                 }
