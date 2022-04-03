@@ -44,8 +44,9 @@ pipeline {
                 // script{
                 //     docker build . -t 
                 // }
-                sh 'pwd'
 
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '455b6a62-bbad-46ae-bb82-95437cba744c', url: 'https://github.com/SOM8018/COMODO_DEVOPS.git']]])
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage ('Sent a email if build successful'){
