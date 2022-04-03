@@ -63,13 +63,15 @@ pipeline {
                 script{
                          withCredentials([string(credentialsId: 'docker-secret-auth', variable: 'dockersecrettoken')]) {
 
-                        sh 'docker logout'
+                        sh '''
 
-                        sh 'docker login -u soamibm -p ${dockersecrettoken} docker.io '
+                        docker login -u soamibm -p ${dockersecrettoken} docker.io
 
-                        sh 'docker tag myfirstimage soamfirstdockerimage/my-app-1.0'
+                        docker tag myfirstimage soamfirstdockerimage/my-app-1.0
 
-                        sh 'docker push soamfirstdockerimage/my-app-1.0'
+                        docker push soamfirstdockerimage/my-app-1.0
+
+                        '''
                     }                   
                     
                 }
