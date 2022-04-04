@@ -74,6 +74,7 @@ pipeline {
                         docker push 34.125.158.228:8083/firstapp:${VERSION}
 
                         '''
+                        
                     }                   
                     
                 }
