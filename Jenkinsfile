@@ -69,7 +69,7 @@ pipeline {
 
                         sh '''
 
-                        docker login -u admin -p ${nexus-docker-auth} 34.125.158.228:8083
+                        docker login -u admin -p Nexus@123 34.125.158.228:8083
 
                         docker push 34.125.158.228:8083/firstapp:${VERSION}
 
