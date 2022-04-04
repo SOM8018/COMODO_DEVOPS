@@ -61,17 +61,20 @@ pipeline {
             }
            
         }
-        stage ('Push docker image'){
+        stage ('Push docker image to Nexus repo'){
 
             steps{
                 script{
-                         withCredentials([string(credentialsId: 'nexus-docker-password', variable: 'nexus-docker-auth')]) {
+                       withCredentials([string(credentialsId: 'nexus-docker-password', variable: 'nexus-docker-auth')]) {
 
+                        //34.125.158.228:8083 is the nexus repo ip 
                         sh '''
-
+                          
                         docker login -u admin -p Nexus@123 34.125.158.228:8083
 
                         docker push 34.125.158.228:8083/firstapp:${VERSION}
+
+                        docker rmi 34.125.158.228:8083/firstapp:${VERSION}
 
                         '''
 
@@ -81,6 +84,11 @@ pipeline {
                 
 
             } 
+        }
+        post{
+            always{
+                mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "mesomofficial@gmail.com" ; 
+            }
         }
        
         // stage('Test') {
