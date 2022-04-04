@@ -65,16 +65,16 @@ pipeline {
 
             steps{
                 script{
-                         withCredentials([string(credentialsId: 'docker-secret-auth', variable: 'dockersecrettoken')]) {
+                         withCredentials([string(credentialsId: 'nexus-docker-password', variable: 'nexus-docker-auth')]) {
 
                         sh '''
 
-                        docker login -u soamibm -p ${dockersecrettoken} 34.125.158.228:8083
+                        docker login -u admin -p ${nexus-docker-auth} 34.125.158.228:8083
 
                         docker push 34.125.158.228:8083/firstapp:${VERSION}
 
                         '''
-                        
+
                     }                   
                     
                 }
