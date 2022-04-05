@@ -100,11 +100,36 @@ pipeline {
 
                         docker push soamibm/firstapp:${VERSION}
 
-
+                        docker rmi soamibm/firstapp:${VERSION}
                         '''
 
                     }                   
                     
+                }
+                
+                
+
+            } 
+        }
+        stage ('Deploy to Kubernetes Cluster'){
+
+            steps{
+                
+               sshagent(['ssh-jenkins']) {
+
+                   sh "scp -o StringHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu"
+
+                   script{
+
+                       try{
+
+                           sh "ssh ubuntu@34.125.209.59 kubectl apply -f ."
+
+                       }catch(error){
+                           "ssh ubuntu@34.125.209.59 kubectl apply -f ."
+                       }
+                   }
+    
                 }
                 
                 
