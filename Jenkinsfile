@@ -122,7 +122,7 @@ pipeline {
                    //"sudo su -c \"sh ./home/centos/releases/xx.sh\" rundeck"     
                    //'''
                    sh '''
-                   ssh -o StrictHostKeyChecking=no IdentitiesOnly=yes -o ubuntu@34.125.209.59
+                   ssh -o StrictHostKeyChecking=no IdentitiesOnly=yes ubuntu@34.125.209.59
                    scp -o StringHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu
                    '''
                    script{
