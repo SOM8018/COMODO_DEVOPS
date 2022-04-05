@@ -117,7 +117,16 @@ pipeline {
                 
                sshagent(['ssh-master1-kubernetes']) {
 
-                   sh "scp -o StringHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu"
+                   //sh '''
+                   // ssh -i ${rundeck_rsa_key} -o StrictHostKeyChecking=no -o centos@xxxx.net 
+                   //"sudo su -c \"sh ./home/centos/releases/xx.sh\" rundeck"     
+                   //'''
+
+                   sh '''
+                   ssh -o StrictHostKeyChecking=no -o ubuntu@34.125.209.59
+                   scp -o StringHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu
+
+                   '''
 
                    script{
 
