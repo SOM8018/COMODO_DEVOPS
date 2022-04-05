@@ -56,7 +56,8 @@ pipeline {
             steps{
                 script{
                     //sh 'docker build -t soamfirstdockerimage/my-app-1.0 . '
-                    sh 'docker build -t 34.125.158.228:8083/firstapp:${VERSION} .'
+                    sh 'docker build -t 34.125.158.228:8083/firstapp:${VERSION} .'   //for nexus
+                    sh 'docker build -t soamibm/firstapp:${VERSION} .'    //for docker
                 }
             }
            
