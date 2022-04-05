@@ -117,7 +117,7 @@ pipeline {
                 
                sshagent(['ssh-master1-kubernetes']) {
 
-                   sh "scp -o StringHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu"
+                   sh "scp Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu"
 
                    script{
 
