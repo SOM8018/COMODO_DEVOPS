@@ -82,6 +82,31 @@ pipeline {
                     
                 }
                 
+                
+
+            } 
+        }
+        stage ('Push docker image to docker hub'){
+
+            steps{
+                script{
+                       withCredentials([string(credentialsId: 'nexus-docker-password', variable: 'nexus-docker-auth')]) {
+
+                        //docker push soamibm/firstapp:tagname
+                        sh '''
+                          
+                        docker login -u soamibm -p T#lstraibm12345 
+
+                        docker push soamibm/firstapp:${VERSION}
+
+
+                        '''
+
+                    }                   
+                    
+                }
+                
+                
 
             } 
         }
