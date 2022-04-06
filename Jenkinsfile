@@ -127,7 +127,7 @@ pipeline {
                    '''
                    script{
                        try{
-                           sh "ssh ubuntu@34.125.209.59 kubectl apply -f ."
+                           sh "ssh ubuntu@34.125.209.59 kubectl get -f ."
                        }catch(error){
                            "ssh ubuntu@34.125.209.59 kubectl apply -f ."
                        }
