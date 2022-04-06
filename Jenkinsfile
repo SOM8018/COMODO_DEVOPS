@@ -122,13 +122,13 @@ pipeline {
                    //"sudo su -c \"sh ./home/centos/releases/xx.sh\" rundeck"     
                    //'''
                    sh '''
-                   scp -o StringHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu
+                   scp -o StrictHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu
                    '''
                    script{
                        try{
-                           sh "ssh ubuntu@34.125.209.59 kubectl get -f ."
+                           sh "ssh ubuntu@34.125.209.59 kubectl apply -f ."
                        }catch(error){
-                           "ssh ubuntu@34.125.209.59 kubectl apply -f ."
+                           "ssh ubuntu@34.125.209.59 kubectl create -f ."
                        }
                    }
                 }
