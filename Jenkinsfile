@@ -122,7 +122,7 @@ pipeline {
                    //"sudo su -c \"sh ./home/centos/releases/xx.sh\" rundeck"     
                    //'''
                    sh '''
-                   scp -o StrictHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu
+                   scp -o StrictHostKeyChecking=no Deployment.yaml ubuntu@34.125.209.59:/home/ubuntu 
                    '''
                    script{
                        try{
