@@ -10,11 +10,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: firstapp
+      app: maven-app
   template:
     metadata:
       labels:
-        app: firstapp
+        app: maven-app
     spec:
       containers:
       - name: maven-app
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodejs-app
+  name: maven-app
   namespace: default
 spec:
   selector:
-    app: nodejs-app
+    app: maven-app
   type: LoadBalancer
   ports:
   - name: http
